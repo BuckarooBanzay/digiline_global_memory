@@ -48,7 +48,7 @@ minetest.register_node("digiline_global_memory:controller", {
 		local meta = minetest.get_meta(pos)
 		if fields.channel then
 			-- set owner and channel on submit
-			meta.set_string("owner", name)
+			meta:set_string("owner", name)
 			meta:set_string("channel",fields.channel)
 		end
 	end,
