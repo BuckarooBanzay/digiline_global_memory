@@ -1,10 +1,10 @@
 
-minetest.register_chatcommand("global_memory", {
+minetest.register_chatcommand("digiline_global_memory", {
   params = "<name>",
 	description = "shows the current memory value",
 	func = function(name, param)
     if param == "" or not param then
-      return false, "Please specify the metric!"
+      return false, "Please specify the memory name!"
     end
 
     return true, dump(digiline_global_memory.get_value(name, param) or "<empty>")
