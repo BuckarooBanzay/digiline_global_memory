@@ -15,8 +15,7 @@ Reading:
 if event.type == "program" then
   digiline_send("channel", {
     command: "GET",
-    name: "my_register",
-    value: 3.141
+    name: "my_register"
   })
 end
 
