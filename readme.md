@@ -14,8 +14,8 @@ Reading:
 ```lua
 if event.type == "program" then
   digiline_send("channel", {
-    command: "GET",
-    name: "my_register"
+    command = "GET",
+    name = "my_register"
   })
 end
 
@@ -27,9 +27,9 @@ end
 Writing:
 ```lua
 digiline_send("channel", {
-  command: "SET",
-  name: "my_register",
-  value: 3.141
+  command = "SET",
+  name = "my_register",
+  value = 3.141
 })
 ```
 
