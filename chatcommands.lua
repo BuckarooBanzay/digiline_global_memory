@@ -10,3 +10,12 @@ minetest.register_chatcommand("digiline_global_memory", {
     return true, dump(digiline_global_memory.get_value(name, param) or "<empty>")
   end
 })
+
+minetest.register_chatcommand("digiline_global_memory_clear", {
+  params = "<name>",
+	description = "clears the global memory of the player",
+	func = function(name)
+    digiline_global_memory.store[name] = {}
+    return true, "Memory cleared"
+  end
+})

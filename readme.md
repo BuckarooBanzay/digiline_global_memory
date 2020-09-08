@@ -33,6 +33,11 @@ digiline_send("channel", {
 })
 ```
 
+# Chatcommands
+
+* **/digiline_global_memory [name]** Returns the contents of the current players memory with given name
+* **/digiline_global_memory_clear** Clears the current players memory
+
 # TODO
 
 * [ ] memory constraints
