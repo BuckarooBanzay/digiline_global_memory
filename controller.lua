@@ -5,8 +5,11 @@ minetest.register_node("digiline_global_memory:controller", {
     cracky=3
   },
 
-	on_construct = function(pos)
+	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
+		-- default digiline channel
+		meta:set_string("channel", "global_memory")
+		meta:set_string("owner", placer:get_player_name() or "")
 		meta:set_string("formspec","field[channel;Channel;${channel}")
 	end,
 
@@ -47,8 +50,7 @@ minetest.register_node("digiline_global_memory:controller", {
 		end
 		local meta = minetest.get_meta(pos)
 		if fields.channel then
-			-- set owner and channel on submit
-			meta:set_string("owner", name)
+			-- setchannel on submit
 			meta:set_string("channel",fields.channel)
 		end
 	end,

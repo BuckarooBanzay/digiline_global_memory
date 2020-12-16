@@ -33,6 +33,8 @@ digiline_send("channel", {
 })
 ```
 
+**NOTE**: the memory is bound to the user who placed it, the same register can only be accessed if it is placed by the same player
+
 # Chatcommands
 
 * **/digiline_global_memory [name]** Returns the contents of the current players memory with given name
