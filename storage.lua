@@ -10,6 +10,17 @@ local function get_player_storage(playername)
     return player_storage
 end
 
+-- returns the players memory-names
+function digiline_global_memory.get_keys(playername)
+    local keys = {}
+    local player_storage = get_player_storage(playername)
+
+    for key in pairs(player_storage) do
+        table.insert(keys, key)
+    end
+    return keys
+end
+
 function digiline_global_memory.get_value(playername, memory_name)
     local player_storage = get_player_storage(playername)
     return player_storage[memory_name]

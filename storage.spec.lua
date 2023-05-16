@@ -17,5 +17,9 @@ mtt.register("storage", function(callback)
 
     digiline_global_memory.flush_changes()
 
+    local keys = digiline_global_memory.get_keys(playername)
+    assert(#keys == 1)
+    assert(keys[1] == memory_name)
+
     callback()
 end)
