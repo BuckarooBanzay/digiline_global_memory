@@ -55,11 +55,7 @@ end
 
 # Persistence
 
-Memory contents are persistet to mod-storage periodically
-
-# TODO
-
-* [ ] crafting recipe
+Memory contents are persisted to mod-storage periodically
 
 # License
 

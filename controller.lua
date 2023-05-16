@@ -83,3 +83,13 @@ minetest.register_node("digiline_global_memory:controller", {
 		}
 	}
 })
+
+-- NOTE: uses the digistuff eeprom as ingredient (not a dependency)
+minetest.register_craft({
+	output = "digiline_global_memory:controller",
+	recipe = {
+		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
+		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
+		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
+	}
+})
