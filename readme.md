@@ -53,11 +53,13 @@ end
 * Per-value data-complexity of `50000` "units?"
 * Per-player max-entries of `30`
 
+# Persistence
+
+Memory contents are persistet to mod-storage periodically
+
 # TODO
 
-* [ ] memory constraints
 * [ ] crafting recipe
-* [ ] persistence
 
 # License
 
