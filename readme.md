@@ -26,11 +26,19 @@ end
 
 Writing:
 ```lua
-digiline_send("channel", {
-  command = "SET",
-  name = "my_register",
-  value = 3.141
-})
+if event.type == "program" then
+  digiline_send("channel", {
+    command = "SET",
+    name = "my_register",
+    value = 3.141
+  })
+end
+
+if event.type == "digiline" and event.channel == "channel" then
+  -- event.msg.success: true/false
+  -- event.msg.message: the error message, if any
+  -- event.msg.code: the error code: -1 = data too long, -2 = number of per-player entries exceeded
+end
 ```
 
 **NOTE**: the memory is bound to the user who placed it, the same register can only be accessed if it is placed by the same player
@@ -39,6 +47,11 @@ digiline_send("channel", {
 
 * **/digiline_global_memory [name]** Returns the contents of the current players memory with given name
 * **/digiline_global_memory_clear** Clears the current players memory
+
+# Memory constraints
+
+* Per-value data-complexity of `50000` "units?"
+* Per-player max-entries of `30`
 
 # TODO
 

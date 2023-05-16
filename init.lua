@@ -1,7 +1,9 @@
 local MP = minetest.get_modpath("digiline_global_memory")
 
 digiline_global_memory = {
-  store = {} -- playername -> memory_name -> value
+  store = {}, -- playername -> memory_name -> value
+  max_cost = 50000,
+  max_items = 30
 }
 
 dofile(MP.."/functions.lua")
