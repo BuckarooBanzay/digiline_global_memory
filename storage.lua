@@ -48,6 +48,11 @@ function digiline_global_memory.set_value(playername, memory_name, raw_value)
     return true
 end
 
+function digiline_global_memory.clear(playername)
+    digiline_global_memory.store[playername] = {}
+    changed_entries[playername] = true
+end
+
 function digiline_global_memory.flush_changes()
     for playername in pairs(changed_entries) do
         local entry = digiline_global_memory.store[playername]

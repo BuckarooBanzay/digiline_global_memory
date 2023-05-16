@@ -21,5 +21,11 @@ mtt.register("storage", function(callback)
     assert(#keys == 1)
     assert(keys[1] == memory_name)
 
+    digiline_global_memory.clear(playername)
+    digiline_global_memory.flush_changes()
+
+    value = digiline_global_memory.get_value(playername, memory_name)
+    assert(value == nil)
+
     callback()
 end)
