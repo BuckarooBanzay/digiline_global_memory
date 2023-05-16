@@ -5,5 +5,6 @@ digiline_global_memory = {
 }
 
 dofile(MP.."/functions.lua")
+dofile(MP.."/storage.lua")
 dofile(MP.."/controller.lua")
 dofile(MP.."/chatcommands.lua")

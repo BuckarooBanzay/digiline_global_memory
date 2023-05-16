@@ -2,7 +2,7 @@
 minetest.register_node("digiline_global_memory:controller", {
 	description = "Digiline global memory controller",
 	groups = {
-    cracky=3
+	cracky=3
   },
 
 	after_place_node = function(pos, placer)
@@ -59,23 +59,26 @@ minetest.register_node("digiline_global_memory:controller", {
 		receptor = {},
 		effector = {
 			action = function(pos, _, channel, msg)
-					local meta = minetest.get_meta(pos)
-					if meta:get_string("channel") ~= channel then
-            return
-          end
-
-					local owner = meta:get_string("owner")
-
-					if type(msg) == "table" and msg.command and msg.name then
-						if msg.command == "GET" then
-							local value = digiline_global_memory.get_value(owner, msg.name)
-							digiline:receptor_send(pos, digiline.rules.default, channel, value)
-						elseif msg.command == "SET" then
-							digiline_global_memory.set_value(owner, msg.name, msg.value)
-						end
-					end
-
+				local meta = minetest.get_meta(pos)
+				if meta:get_string("channel") ~= channel then
+					return
 				end
+
+				local owner = meta:get_string("owner")
+
+				if type(msg) == "table" and msg.command and msg.name then
+					if msg.command == "GET" then
+						local value = digiline_global_memory.get_value(owner, msg.name)
+						digiline:receptor_send(pos, digiline.rules.default, channel, value)
+					elseif msg.command == "SET" then
+						local success, err_msg = digiline_global_memory.set_value(owner, msg.name, msg.value)
+						digiline:receptor_send(pos, digiline.rules.default, channel, {
+							success = success,
+							message = err_msg
+						})
+					end
+				end
+			end
 		}
 	}
 })
