@@ -1,13 +1,17 @@
 local storage = minetest.get_mod_storage()
 local changed_entries = {} -- playername -> true
 
-function digiline_global_memory.get_value(playername, memory_name)
+local function get_player_storage(playername)
     local player_storage = digiline_global_memory.store[playername]
     if not player_storage then
         player_storage = minetest.deserialize(storage:get_string(playername)) or {}
         digiline_global_memory.store[playername] = player_storage
     end
+    return player_storage
+end
 
+function digiline_global_memory.get_value(playername, memory_name)
+    local player_storage = get_player_storage(playername)
     return player_storage[memory_name]
 end
 
@@ -17,7 +21,7 @@ function digiline_global_memory.set_value(playername, memory_name, raw_value)
         return false, "data too long/complex", -1
     end
 
-    local player_storage = digiline_global_memory.get_value(playername, memory_name)
+    local player_storage = get_player_storage(playername)
 
     local count = 0
     for _ in pairs(player_storage) do
@@ -33,13 +37,17 @@ function digiline_global_memory.set_value(playername, memory_name, raw_value)
     return true
 end
 
--- save changed entries periodically
-local function save_worker()
+function digiline_global_memory.flush_changes()
     for playername in pairs(changed_entries) do
         local entry = digiline_global_memory.store[playername]
         storage:set_string(playername, minetest.serialize(entry))
     end
     changed_entries = {}
+end
+
+-- save changed entries periodically
+local function save_worker()
+    digiline_global_memory.flush_changes()
     minetest.after(5, save_worker)
 end
 minetest.after(5, save_worker)

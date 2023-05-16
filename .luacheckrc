@@ -13,5 +13,5 @@ read_globals = {
 	"dump", "minetest",
 
 	-- deps
-	"digiline"
+	"digiline", "mtt"
 }
