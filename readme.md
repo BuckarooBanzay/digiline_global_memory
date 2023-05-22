@@ -66,7 +66,7 @@ end
 # Memory constraints
 
 * Per-value data-complexity of `50000` "units?"
-* Per-player max-entries of `30`
+* Per-player max-entries of `100`
 
 # Persistence
 
