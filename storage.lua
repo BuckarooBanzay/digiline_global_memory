@@ -21,11 +21,28 @@ function digiline_global_memory.get_keys(playername)
     return keys
 end
 
+-- increment and get value
+-- resets the value in store to 0 if it is not a number
+function digiline_global_memory.inc_value(playername, memory_name, inc)
+    local player_storage = get_player_storage(playername)
+    local value = player_storage[memory_name]
+    if type(value) ~= "number" then
+        value = 0
+    end
+    if type(inc) == "number" then
+        value = value + inc
+        player_storage[memory_name] = value
+    end
+    return value
+end
+
+-- get value
 function digiline_global_memory.get_value(playername, memory_name)
     local player_storage = get_player_storage(playername)
     return player_storage[memory_name]
 end
 
+-- set value
 function digiline_global_memory.set_value(playername, memory_name, raw_value)
     local value, cost = digiline_global_memory.clean_and_weigh_digiline_message(raw_value)
     if cost > digiline_global_memory.max_cost then

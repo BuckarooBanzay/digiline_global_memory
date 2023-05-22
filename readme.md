@@ -41,6 +41,21 @@ if event.type == "digiline" and event.channel == "channel" then
 end
 ```
 
+Atomic write:
+```lua
+if event.type == "program" then
+  digiline_send("channel", {
+    command = "INC",
+    name = "my_register",
+    value = 1
+  })
+end
+
+if event.type == "digiline" and event.channel == "channel" then
+  print("New value: " .. event.msg)
+end
+```
+
 **NOTE**: the memory is bound to the user who placed it, the same register can only be accessed if it is placed by the same player
 
 # Chatcommands
