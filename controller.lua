@@ -2,6 +2,7 @@
 minetest.register_node("digiline_global_memory:controller", {
 	description = "Digiline global memory controller",
 	groups = { cracky=3 },
+	is_ground_content = false,
 
 	after_place_node = function(pos, placer)
 		local meta = minetest.get_meta(pos)
