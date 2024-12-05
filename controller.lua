@@ -66,28 +66,30 @@ minetest.register_node("digiline_global_memory:controller", {
 					return
 				end
 
+				if not (type(msg) == "table" and msg.command and msg.name) then
+					return
+				end
+
 				local owner = meta:get_string("owner")
 
-				if type(msg) == "table" and msg.command and msg.name then
-					-- read
-					if msg.command == "GET" then
-						local value = digiline_global_memory.get_value(owner, msg.name)
-						digiline:receptor_send(pos, digiline.rules.default, channel, value)
+				-- read
+				if msg.command == "GET" then
+					local value = digiline_global_memory.get_value(owner, msg.name)
+					digiline:receptor_send(pos, digiline.rules.default, channel, value)
 
-					-- write
-					elseif msg.command == "SET" then
-						local success, err_msg, err_code = digiline_global_memory.set_value(owner, msg.name, msg.value)
-						digiline:receptor_send(pos, digiline.rules.default, channel, {
-							success = success,
-							message = err_msg,
-							code = err_code
-						})
+				-- write
+				elseif msg.command == "SET" then
+					local success, err_msg, err_code = digiline_global_memory.set_value(owner, msg.name, msg.value)
+					digiline:receptor_send(pos, digiline.rules.default, channel, {
+						success = success,
+						message = err_msg,
+						code = err_code
+					})
 
-					-- increment
-					elseif msg.command == "INC" then
-						local new_value = digiline_global_memory.inc_value(owner, msg.name, msg.value)
-						digiline:receptor_send(pos, digiline.rules.default, channel, new_value)
-					end
+				-- increment
+				elseif msg.command == "INC" then
+					local new_value = digiline_global_memory.inc_value(owner, msg.name, msg.value)
+					digiline:receptor_send(pos, digiline.rules.default, channel, new_value)
 				end
 			end
 		}
