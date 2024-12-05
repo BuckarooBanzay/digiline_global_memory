@@ -54,7 +54,9 @@ if event.type == "digiline" and event.channel == "channel" then
 end
 ```
 
-**NOTE**: the memory is bound to the user who placed it, the same register can only be accessed if it is placed by the same player
+**NOTE**: the memory is bound to the user who placed the memory controller,
+the same register can only be accessed by controllers placed by
+the same player
 
 # Chatcommands
 
