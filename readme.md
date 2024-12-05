@@ -1,6 +1,6 @@
 
-Digilines global memory controller
-# Overview
+# Digilines global memory controller
+## Overview
 
 Global digiline storage for variables of any kind (use with care)
 
@@ -61,7 +61,7 @@ the same player
 # Chatcommands
 
 * **`/digiline_global_memory <register name>`** Returns the contents of the current players
- memory with given name
+memory with given name
 * **`/digiline_global_memory_clear`** Clears the current players memory
 
 # Memory constraints
