@@ -4,8 +4,6 @@ Digilines global memory controller
 
 Global digiline storage for variables of any kind (use with care)
 
-**NOTE**: the storage is not permanent and lost on shutdown
-
 ## Usage
 
 Usage:
