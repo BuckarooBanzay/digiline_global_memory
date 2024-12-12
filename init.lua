@@ -6,12 +6,12 @@ digiline_global_memory = {
   max_items = 100
 }
 
-dofile(MP.."/functions.lua")
-dofile(MP.."/storage.lua")
-dofile(MP.."/controller.lua")
-dofile(MP.."/chatcommands.lua")
+dofile(MP .. "/functions.lua")
+dofile(MP .. "/storage.lua")
+dofile(MP .. "/controller.lua")
+dofile(MP .. "/chatcommands.lua")
 
 if minetest.get_modpath("mtt") and mtt.enabled then
-  dofile(MP.."/functions.spec.lua")
-  dofile(MP.."/storage.spec.lua")
+  dofile(MP .. "/functions.spec.lua")
+  dofile(MP .. "/storage.spec.lua")
 end

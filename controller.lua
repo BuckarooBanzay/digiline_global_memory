@@ -1,7 +1,7 @@
 
 minetest.register_node("digiline_global_memory:controller", {
 	description = "Digiline global memory controller",
-	groups = { cracky=3 },
+	groups = { cracky = 3 },
 	is_ground_content = false,
 
 	after_place_node = function(pos, placer)
@@ -32,9 +32,9 @@ minetest.register_node("digiline_global_memory:controller", {
 		--From Luacontroller
 		type = "fixed",
 		fixed = {
-			{-8/16, -8/16, -8/16, 8/16, -7/16, 8/16}, -- Bottom slab
-			{-5/16, -7/16, -5/16, 5/16, -6/16, 5/16}, -- Circuit board
-			{-3/16, -6/16, -3/16, 3/16, -5/16, 3/16}, -- IC
+			{ -8/16, -8/16, -8/16, 8/16, -7/16, 8/16 }, -- Bottom slab
+			{ -5/16, -7/16, -5/16, 5/16, -6/16, 5/16 }, -- Circuit board
+			{ -3/16, -6/16, -3/16, 3/16, -5/16, 3/16 }, -- IC
 		}
 	},
 
@@ -43,14 +43,17 @@ minetest.register_node("digiline_global_memory:controller", {
 
 	on_receive_fields = function(pos, _, fields, sender)
 		local name = sender:get_player_name()
-		if minetest.is_protected(pos,name) and not minetest.check_player_privs(name,{protection_bypass=true}) then
+		if minetest.is_protected(pos,name)
+			and not minetest.check_player_privs(name, { protection_bypass = true })
+		then
 			minetest.record_protection_violation(pos,name)
 			return
 		end
+
 		local meta = minetest.get_meta(pos)
 		if fields.channel then
 			-- setchannel on submit
-			meta:set_string("channel",fields.channel)
+			meta:set_string("channel", fields.channel)
 		end
 	end,
 
@@ -63,28 +66,30 @@ minetest.register_node("digiline_global_memory:controller", {
 					return
 				end
 
+				if not (type(msg) == "table" and msg.command and msg.name) then
+					return
+				end
+
 				local owner = meta:get_string("owner")
 
-				if type(msg) == "table" and msg.command and msg.name then
-					-- read
-					if msg.command == "GET" then
-						local value = digiline_global_memory.get_value(owner, msg.name)
-						digiline:receptor_send(pos, digiline.rules.default, channel, value)
+				-- read
+				if msg.command == "GET" then
+					local value = digiline_global_memory.get_value(owner, msg.name)
+					digiline:receptor_send(pos, digiline.rules.default, channel, value)
 
-					-- write
-					elseif msg.command == "SET" then
-						local success, err_msg, err_code = digiline_global_memory.set_value(owner, msg.name, msg.value)
-						digiline:receptor_send(pos, digiline.rules.default, channel, {
-							success = success,
-							message = err_msg,
-							code = err_code
-						})
+				-- write
+				elseif msg.command == "SET" then
+					local success, err_msg, err_code = digiline_global_memory.set_value(owner, msg.name, msg.value)
+					digiline:receptor_send(pos, digiline.rules.default, channel, {
+						success = success,
+						message = err_msg,
+						code = err_code
+					})
 
-					-- increment
-					elseif msg.command == "INC" then
-						local new_value = digiline_global_memory.inc_value(owner, msg.name, msg.value)
-						digiline:receptor_send(pos, digiline.rules.default, channel, new_value)
-					end
+				-- increment
+				elseif msg.command == "INC" then
+					local new_value = digiline_global_memory.inc_value(owner, msg.name, msg.value)
+					digiline:receptor_send(pos, digiline.rules.default, channel, new_value)
 				end
 			end
 		}
@@ -95,8 +100,8 @@ minetest.register_node("digiline_global_memory:controller", {
 minetest.register_craft({
 	output = "digiline_global_memory:controller",
 	recipe = {
-		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
-		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
-		{"digistuff:eeprom","digilines:wire_std_00000000","digistuff:eeprom"},
+		{ "digistuff:eeprom", "digilines:wire_std_00000000", "digistuff:eeprom" },
+		{ "digistuff:eeprom", "digilines:wire_std_00000000", "digistuff:eeprom" },
+		{ "digistuff:eeprom", "digilines:wire_std_00000000", "digistuff:eeprom" },
 	}
 })

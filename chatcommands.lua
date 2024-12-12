@@ -12,7 +12,7 @@ minetest.register_chatcommand("digiline_global_memory", {
 })
 
 minetest.register_chatcommand("digiline_global_memory_clear", {
-  params = "<name>",
+  params = "",
   description = "clears the global memory of the player",
   func = function(name)
     digiline_global_memory.clear(name)

@@ -1,10 +1,8 @@
 
-Digilines global memory controller
-# Overview
+# Digilines global memory controller
+## Overview
 
 Global digiline storage for variables of any kind (use with care)
-
-**NOTE**: the storage is not permanent and lost on shutdown
 
 ## Usage
 
@@ -56,12 +54,15 @@ if event.type == "digiline" and event.channel == "channel" then
 end
 ```
 
-**NOTE**: the memory is bound to the user who placed it, the same register can only be accessed if it is placed by the same player
+**NOTE**: the memory is bound to the user who placed the memory controller,
+the same register can only be accessed by controllers placed by
+the same player
 
 # Chatcommands
 
-* **/digiline_global_memory [name]** Returns the contents of the current players memory with given name
-* **/digiline_global_memory_clear** Clears the current players memory
+* **`/digiline_global_memory <register name>`** Returns the contents of the current players
+memory with given name
+* **`/digiline_global_memory_clear`** Clears the current players memory
 
 # Memory constraints
 
